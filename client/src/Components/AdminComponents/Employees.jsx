@@ -42,7 +42,7 @@ const Employees = () => {
                 </thead>
                 <tbody>
                     {employees.map((employee) => {
-                        return (
+                        return (    
                             <tr key={employee.id}>
                                 <td>
                                     <img className="h-10"

@@ -123,4 +123,31 @@ const updateTaskStatus = async (req,res)=>{
 
 }
 
-module.exports = { addTask ,getMyTasks,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus};
+const getCompletedTasks = async (req,res) =>{
+    const sql = "SELECT * FROM tasks WHERE status = ?";
+
+    const [completed] = await db.query(sql,["Completed"]);
+    console.log("Completed from DB:", completed);
+
+    return res.json(completed);
+}
+
+const getProgressTasks = async (req,res) =>{
+
+    const sql = "SELECT * FROM tasks WHERE status = ?";
+
+    const [progress] = await db.query(sql,["In Progress"]);
+    console.log(progress)
+    return res.json(progress);
+}
+
+const getNotStartedTasks = async (req,res) =>{
+    const sql = "SELECT * FROM tasks WHERE status = ?";
+
+    const [notstarted] = await db.query(sql,["Not Started"]);
+    console.log(notstarted)
+    return res.json(notstarted);
+}
+
+
+module.exports = { addTask ,getMyTasks,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus,getCompletedTasks, getProgressTasks ,getNotStartedTasks  };

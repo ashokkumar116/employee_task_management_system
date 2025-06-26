@@ -25,7 +25,6 @@ function App() {
         <Routes>
           <Route path='/login' element={user ? <Navigate to={'/'}/> : <Login/>} />
           <Route path='/' element={<ProtectedRoutes><Home/></ProtectedRoutes>} />
-          <Route path='/dashboard' element={<AdminProtectedRoutes><Admindashboard/></AdminProtectedRoutes>} />
           <Route path='/employees' element={<AdminProtectedRoutes><Employees/></AdminProtectedRoutes>} />
           <Route path='/tasks' element={<AdminProtectedRoutes><Tasks/></AdminProtectedRoutes>} />
           <Route path='/announcements' element={<AdminProtectedRoutes><Announcements/></AdminProtectedRoutes>} />

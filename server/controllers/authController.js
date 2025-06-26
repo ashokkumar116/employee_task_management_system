@@ -70,6 +70,22 @@ const getAllEmployees = async (req,res)=>{
     res.json(result);
 }
 
+const getAdmins = async(req,res)=>{
+    const sql = "SELECT * FROM users WHERE role = ?";
+
+    const [admins] = await db.query(sql,["admin"]);
+    console.log(admins)
+    return res.json(admins);
+}
+
+const getEmp = async(req,res)=>{
+    const sql = "SELECT * FROM users WHERE role = ?";
+
+    const [emp] = await db.query(sql,["employee"]);
+    console.log(emp)
+    return res.json(emp);
+}
+
 const getSpecificUser = async(req,res)=>{
     const {id} = req.params;
 
@@ -154,4 +170,4 @@ const logout = (req,res) =>{
 
 
 
-module.exports = {addEmployee,login,getAllEmployees,logout,getSpecificUser,editUser,deleteUser,getMe,updateProfilePic};
+module.exports = {addEmployee,login,getAllEmployees,logout,getSpecificUser,editUser,deleteUser,getMe,updateProfilePic ,getAdmins,getEmp};
