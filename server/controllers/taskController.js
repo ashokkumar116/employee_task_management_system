@@ -104,4 +104,23 @@ const deleteTask = async (req,res) =>{
 
 }
 
-module.exports = { addTask ,getMyTasks,getAllTasks ,viewTask,editTask,deleteTask};
+const updateTaskStatus = async (req,res)=>{
+    const id = req.params.id;
+
+    const [tasks] = await db.query("SELECT * FROM tasks WHERE id = ?",[id]);
+
+    if(tasks.length === 0){
+        return res.json({message:"Task Not Found"});
+    }
+
+    const {status} = req.body;
+
+    const sql = "UPDATE tasks SET status = ? WHERE id = ?";
+
+    await db.query(sql,[status,id]);
+
+    return res.status(200).json({message:"Task Status updated"})
+
+}
+
+module.exports = { addTask ,getMyTasks,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus};
