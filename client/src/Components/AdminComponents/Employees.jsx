@@ -14,6 +14,8 @@ import { Calendar } from "primereact/calendar";
 import { Password } from "primereact/password";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
 
 const Employees = () => {
     const [employees, setEmployees] = useState([]);
@@ -38,6 +40,8 @@ const Employees = () => {
 
     const [addVisible, setAddVisible] = useState(false);
 
+    const [globalFilter, setGlobalFilter] = useState("");
+
     const fetchEmployees = async () => {
         try {
             const employeeslist = await axios.get("/auth/employees");
@@ -56,7 +60,6 @@ const Employees = () => {
         return <div>loading....</div>;
     }
 
-    
     const handleDelete = (id, name) => {
         Swal.fire({
             title: `Delete ${name}?`,
@@ -71,11 +74,11 @@ const Employees = () => {
                 try {
                     const res = await axios.delete(
                         `/auth/employee/delete/${id}`
-                        );
-                        if (res.status === 200) {
-                            Swal.fire(
-                                "Deleted!",
-                                `${name} has been removed.`,
+                    );
+                    if (res.status === 200) {
+                        Swal.fire(
+                            "Deleted!",
+                            `${name} has been removed.`,
                             "success"
                         );
                         fetchEmployees();
@@ -87,7 +90,7 @@ const Employees = () => {
             }
         });
     };
-    
+
     const formatDate = (dateString) => {
         if (!dateString) return "";
         const date = new Date(dateString);
@@ -96,7 +99,7 @@ const Employees = () => {
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     };
-    
+
     const joinDateTemplate = (rowData) => {
         return <span>{formatDate(rowData.join_date)}</span>;
     };
@@ -107,21 +110,19 @@ const Employees = () => {
                 <button
                     onClick={() => openEditModal(rowData)}
                     className="btn btn-warning"
-                    >
+                >
                     Edit
                 </button>
                 <button
                     onClick={() => handleDelete(rowData.id, rowData.name)}
                     className="btn btn-error"
-                    >
+                >
                     Delete
                 </button>
             </div>
         );
     };
 
-
-    
     const profileTemplate = (rowData) => {
         const imageUrl = rowData.profile_pic
             ? `http://localhost:5000${rowData.profile_pic}`
@@ -193,7 +194,6 @@ const Employees = () => {
         setEditVisible(true);
     };
 
-
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -207,7 +207,7 @@ const Employees = () => {
         if (profile) formData.append("profile_pic", profile);
 
         try {
-            setErrMess("")
+            setErrMess("");
             const res = await axios.put(
                 `/auth/employee/edit/${selectedEmployee.id}`,
                 formData
@@ -226,33 +226,97 @@ const Employees = () => {
         }
     };
 
+    const [filters, setFilters] = useState({
+        global: { value: "", matchMode: "contains" },
+        role: { value: null, matchMode: "equals" }
+      });
+      
+      
+
     return (
         <div className="px-4 py-6 pl-56 pr-6 py-6">
             <h1 className="text-3xl text-center mb-6 uppercase font-bold">
                 Employees List
             </h1>
 
-            <button
-                className="btn btn-success "
-                onClick={() => setAddVisible(true)}
-            >
-                Add Employee +
-            </button>
+            <div className="flex items-center justify-between">
+                <button
+                    className="btn btn-success "
+                    onClick={() => setAddVisible(true)}
+                >
+                    Add Employee +
+                </button>
+
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search"> </InputIcon>
+                    <InputText
+                        placeholder="Search"
+                        value={filters.global.value}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setFilters((prevFilters) => ({
+                              ...prevFilters,
+                              global: { ...prevFilters.global, value }
+                            }));
+                          }}
+                    />
+                </IconField>
+                <Dropdown
+                    value={filters.role.value}
+                    options={[
+                        { label: "All", value: null },
+                        { label: "Admin", value: "Admin" },
+                        { label: "Employee", value: "Employee" },
+                    ]}
+                    onChange={(e) => {
+                        const selectedValue = e.value;
+                    
+                        setFilters((prev) => {
+                          const updated = { ...prev };
+                    
+                          if (selectedValue === null) {
+                            // 🔥 This will REMOVE role filter completely
+                            delete updated.role;
+                          } else {
+                            updated.role = {
+                              value: selectedValue,
+                              matchMode: "equals"
+                            };
+                          }
+                    
+                          return updated;
+                        });
+                      }}
+                    placeholder="Filter by Role"
+                />
+            </div>
 
             <DataTable
+                removableSort
                 className="mt-6"
                 paginator
                 rows={5}
+                emptyMessage={"No Employees Found"}
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 stripedRows
                 value={employees}
                 tableStyle={{ minWidth: "50rem" }}
+                globalFilterFields={[
+                    "name",
+                    "role",
+                    "email",
+                    "position",
+                    "contact",
+                ]}
+                filters={filters}
+
             >
                 <Column field="name" header="Name" />
                 <Column field="email" header="Email" />
-                <Column field="role" header="Role" />
+                <Column field="role" header="Role" filter/>
                 <Column field="position" header="Position" />
                 <Column
+                    sortable
                     field="join_date"
                     header="Joining Date"
                     body={joinDateTemplate}

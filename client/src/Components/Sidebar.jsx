@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div className="fixed top-0 left-0 h-full w-52 bg-gray-900 p-4 shadow-lg flex flex-col items-center gap-10 z-50">
       <div className="flex flex-col items-center gap-2 mt-4">
         <img
-          src={`http://localhost:5000${user.profile_pic}`}
+          src={user.profile_pic ?`http://localhost:5000${user.profile_pic}`:"http://localhost:5000/uploads/default.webp"}
           alt="Profile"
           className="w-16 h-16 rounded-full border-2 border-gray-600"
         />
