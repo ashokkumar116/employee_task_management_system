@@ -14,7 +14,6 @@ const Sidebar = () => {
 
   return (
     <div className="fixed top-0 left-0 h-full w-52 bg-gray-900 p-4 shadow-lg flex flex-col items-center gap-10 z-50">
-      {/* Profile */}
       <div className="flex flex-col items-center gap-2 mt-4">
         <img
           src={`http://localhost:5000${user.profile_pic}`}
@@ -25,8 +24,6 @@ const Sidebar = () => {
           {user.name.toUpperCase()}
         </h2>
       </div>
-
-      {/* Nav Links */}
       <div className="flex flex-col gap-5 w-full items-center text-white font-medium text-sm">
         <Link
           to="/"

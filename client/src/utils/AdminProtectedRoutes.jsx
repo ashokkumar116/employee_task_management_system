@@ -7,7 +7,7 @@ const AdminProtectedRoutes = ({children}) => {
     const {user,loading} = useContext(AuthContext);
     if (loading) return <div>Loading...</div>;
 
-    return user.role === "admin" ? children : <Navigate to={'/login'} />
+    return user.role === "Admin" ? children : <Navigate to={'/login'} />
 }
 
 export default AdminProtectedRoutes

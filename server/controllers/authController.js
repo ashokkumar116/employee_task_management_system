@@ -108,7 +108,7 @@ const editUser = async (req,res)=>{
     console.log(name,email,role,position,contact);
     console.log(req.body);
 
-    const profile_pic = req.file ? `uploads/${req.file.filename}` : null;
+    const profile_pic = req.file ? `/uploads/${req.file.filename}` : null;
 
     const sql = "UPDATE users SET name = ? , email = ? , role = ? , position = ? , contact = ? , profile_pic = ? WHERE id = ?";
 

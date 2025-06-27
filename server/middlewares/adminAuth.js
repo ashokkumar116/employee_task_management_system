@@ -11,7 +11,7 @@ const adminAuth = (req,res,next)=>{
         const decoded = jwt.verify(token,process.env.JWT_KEY);
         console.log(decoded.role);
 
-        if(decoded.role === 'admin'){
+        if(decoded.role === 'Admin'){
             req.user = decoded;
             console.log(decoded);
             next();

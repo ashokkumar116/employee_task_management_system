@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import './App.css'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Login from './Components/Login'
 import Home from './Pages/Home'
@@ -25,7 +24,7 @@ function App() {
         <Routes>
           <Route path='/login' element={user ? <Navigate to={'/'}/> : <Login/>} />
           <Route path='/' element={<ProtectedRoutes><Home/></ProtectedRoutes>} />
-          <Route path='/employees' element={<AdminProtectedRoutes><Employees/></AdminProtectedRoutes>} />
+          <Route path='/employees' element={user?<AdminProtectedRoutes><Employees/></AdminProtectedRoutes>:<Navigate to={'/login'}/>} />
           <Route path='/tasks' element={<AdminProtectedRoutes><Tasks/></AdminProtectedRoutes>} />
           <Route path='/announcements' element={<AdminProtectedRoutes><Announcements/></AdminProtectedRoutes>} />
           <Route path='/settings' element={<AdminProtectedRoutes><Settings/></AdminProtectedRoutes>} />
