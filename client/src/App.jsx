@@ -14,8 +14,10 @@ import Settings from './Components/AdminComponents/Settings'
 
 function App() {
 
-  const {user} = useContext(AuthContext);
-
+  const {user,loading} = useContext(AuthContext);
+  if(loading){
+    return <div>Loading...</div>
+  }
   return (
     <>
       
@@ -24,8 +26,8 @@ function App() {
         <Routes>
           <Route path='/login' element={user ? <Navigate to={'/'}/> : <Login/>} />
           <Route path='/' element={<ProtectedRoutes><Home/></ProtectedRoutes>} />
-          <Route path='/employees' element={user?<AdminProtectedRoutes><Employees/></AdminProtectedRoutes>:<Navigate to={'/login'}/>} />
-          <Route path='/tasks' element={<AdminProtectedRoutes><Tasks/></AdminProtectedRoutes>} />
+          <Route path='/tasks' element={ user ? <AdminProtectedRoutes><Tasks/></AdminProtectedRoutes> : <Navigate to={'/login'}/>} />
+          <Route path='/employees' element={user ? <AdminProtectedRoutes><Employees/></AdminProtectedRoutes>:<Navigate to={'/login'}/>} />
           <Route path='/announcements' element={<AdminProtectedRoutes><Announcements/></AdminProtectedRoutes>} />
           <Route path='/settings' element={<AdminProtectedRoutes><Settings/></AdminProtectedRoutes>} />
           

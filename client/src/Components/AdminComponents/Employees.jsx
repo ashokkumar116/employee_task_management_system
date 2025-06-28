@@ -40,8 +40,6 @@ const Employees = () => {
 
     const [addVisible, setAddVisible] = useState(false);
 
-    const [globalFilter, setGlobalFilter] = useState("");
-
     const fetchEmployees = async () => {
         try {
             const employeeslist = await axios.get("/auth/employees");
@@ -92,13 +90,12 @@ const Employees = () => {
     };
 
     const formatDate = (dateString) => {
-        if (!dateString) return "";
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-    };
+        return new Date(dateString).toLocaleDateString('en-IN', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric'
+      });
+      };
 
     const joinDateTemplate = (rowData) => {
         return <span>{formatDate(rowData.join_date)}</span>;
@@ -228,10 +225,25 @@ const Employees = () => {
 
     const [filters, setFilters] = useState({
         global: { value: "", matchMode: "contains" },
-        role: { value: null, matchMode: "equals" }
-      });
-      
-      
+        role: { value: null, matchMode: "equals" },
+        position: { value: null, matchMode: "equals" },
+    });
+    const [roleFilterOptions, setRoleFilterOptions] = useState([]);
+    const [positionFilterOptions, setPositionFilterOptions] = useState([]);
+
+    useEffect(() => {
+        if (employees.length > 0) {
+            const rolesset = new Set(employees.map((emp) => emp.role));
+            const positionset = new Set(employees.map((pos) => pos.position));
+
+            setRoleFilterOptions(
+                [...rolesset].map((role) => ({ label: role, value: role }))
+            );
+            setPositionFilterOptions(
+                [...positionset].map((pos) => ({ label: pos, value: pos }))
+            );
+        }
+    }, [employees]);
 
     return (
         <div className="px-4 py-6 pl-56 pr-6 py-6">
@@ -255,40 +267,12 @@ const Employees = () => {
                         onChange={(e) => {
                             const value = e.target.value;
                             setFilters((prevFilters) => ({
-                              ...prevFilters,
-                              global: { ...prevFilters.global, value }
+                                ...prevFilters,
+                                global: { ...prevFilters.global, value },
                             }));
-                          }}
+                        }}
                     />
                 </IconField>
-                <Dropdown
-                    value={filters.role.value}
-                    options={[
-                        { label: "All", value: null },
-                        { label: "Admin", value: "Admin" },
-                        { label: "Employee", value: "Employee" },
-                    ]}
-                    onChange={(e) => {
-                        const selectedValue = e.value;
-                    
-                        setFilters((prev) => {
-                          const updated = { ...prev };
-                    
-                          if (selectedValue === null) {
-                            // 🔥 This will REMOVE role filter completely
-                            delete updated.role;
-                          } else {
-                            updated.role = {
-                              value: selectedValue,
-                              matchMode: "equals"
-                            };
-                          }
-                    
-                          return updated;
-                        });
-                      }}
-                    placeholder="Filter by Role"
-                />
             </div>
 
             <DataTable
@@ -309,12 +293,35 @@ const Employees = () => {
                     "contact",
                 ]}
                 filters={filters}
-
             >
                 <Column field="name" header="Name" />
                 <Column field="email" header="Email" />
-                <Column field="role" header="Role" filter/>
-                <Column field="position" header="Position" />
+                <Column
+                    showFilterMatchModes={false}
+                    field="role"
+                    header="Role"
+                    filter
+                    filterElement={(options) => {
+                       return <Dropdown
+                            value={options.value}
+                            options={roleFilterOptions}
+                            onChange={(e) => {
+                                options.filterCallback(e.value, options.index);
+                            }}
+                            placeholder="Sort By Role"
+                            className="p-column-filter"
+                            
+                        />;
+                    }}
+                />
+                <Column field="position" header="Position" showFilterMatchModes={false} filter filterElement={(options)=>(
+                    <Dropdown 
+                        value={options.value}
+                        options={positionFilterOptions}
+                        onChange={(e)=>options.filterCallback(e.value,options.index)}
+                        placeholder="Sort by Position"
+                    />
+                )} />
                 <Column
                     sortable
                     field="join_date"
@@ -396,8 +403,7 @@ const Employees = () => {
                         placeholder="Mobile Number"
                         value={contact}
                         useGrouping={false}
-                        Integer
-                        onChange={(e) => setContact(e.target.value)}
+                        onChange={(e) => setContact(e.value)}
                         required
                     />
                     <Calendar

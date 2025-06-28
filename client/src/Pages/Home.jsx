@@ -92,9 +92,6 @@ const Home = () => {
         fetchNotStartedCount();
     }, []);
 
-    const handleLogout = async () => {
-        await logout();
-    };
 
     if (loading) {
         return <div>loading...</div>;

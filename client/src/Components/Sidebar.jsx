@@ -32,16 +32,17 @@ const Sidebar = () => {
           Dashboard
         </Link>
         <Link
-          to="/tasks"
-          className="hover:bg-gray-800 w-full text-center py-2 rounded-md"
-        >
-          Tasks
-        </Link>
-        <Link
           to="/employees"
           className="hover:bg-gray-800 w-full text-center py-2 rounded-md"
         >
           Employees
+        </Link>
+        
+        <Link
+          to="/tasks"
+          className="hover:bg-gray-800 w-full text-center py-2 rounded-md"
+        >
+          Tasks
         </Link>
         <Link
           to="/announcements"

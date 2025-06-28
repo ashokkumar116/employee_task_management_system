@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) =>{
         const response = await axios.post('/auth/login',{email,password},{withCredentials:true});
         console.log(email,password);
         if(response.status === 200) {
-            fetchUser();
+             fetchUser();
             return true;
         }
         setUser(null);
@@ -31,7 +31,7 @@ export const AuthProvider = ({children}) =>{
         }
     }
 
-    const fetchUser = async (req,res) =>{
+    const fetchUser = async () =>{
         try {
             const user = await axios.get('/auth/me',{withCredentials:true});
 
