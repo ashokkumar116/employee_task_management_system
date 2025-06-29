@@ -90,12 +90,12 @@ const Employees = () => {
     };
 
     const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleDateString('en-IN', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric'
-      });
-      };
+        return new Date(dateString).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+    };
 
     const joinDateTemplate = (rowData) => {
         return <span>{formatDate(rowData.join_date)}</span>;
@@ -146,8 +146,14 @@ const Employees = () => {
         formData.append("position", position);
         formData.append("contact", contact);
         const formattedDate = join_date
-            ? join_date.toISOString().split("T")[0]
+            ? `${join_date.getFullYear()}-${String(
+                  join_date.getMonth() + 1
+              ).padStart(2, "0")}-${String(join_date.getDate()).padStart(
+                  2,
+                  "0"
+              )}`
             : "";
+
         formData.append("join_date", formattedDate);
         formData.append("profile_pic", profile);
 
@@ -262,7 +268,7 @@ const Employees = () => {
                 <IconField iconPosition="left">
                     <InputIcon className="pi pi-search"> </InputIcon>
                     <InputText
-                        placeholder="Search"
+                        placeholder="Search Employees"
                         value={filters.global.value}
                         onChange={(e) => {
                             const value = e.target.value;
@@ -302,26 +308,38 @@ const Employees = () => {
                     header="Role"
                     filter
                     filterElement={(options) => {
-                       return <Dropdown
-                            value={options.value}
-                            options={roleFilterOptions}
-                            onChange={(e) => {
-                                options.filterCallback(e.value, options.index);
-                            }}
-                            placeholder="Sort By Role"
-                            className="p-column-filter"
-                            
-                        />;
+                        return (
+                            <Dropdown
+                                value={options.value}
+                                options={roleFilterOptions}
+                                onChange={(e) => {
+                                    options.filterCallback(
+                                        e.value,
+                                        options.index
+                                    );
+                                }}
+                                placeholder="Sort By Role"
+                                className="p-column-filter"
+                            />
+                        );
                     }}
                 />
-                <Column field="position" header="Position" showFilterMatchModes={false} filter filterElement={(options)=>(
-                    <Dropdown 
-                        value={options.value}
-                        options={positionFilterOptions}
-                        onChange={(e)=>options.filterCallback(e.value,options.index)}
-                        placeholder="Sort by Position"
-                    />
-                )} />
+                <Column
+                    field="position"
+                    header="Position"
+                    showFilterMatchModes={false}
+                    filter
+                    filterElement={(options) => (
+                        <Dropdown
+                            value={options.value}
+                            options={positionFilterOptions}
+                            onChange={(e) =>
+                                options.filterCallback(e.value, options.index)
+                            }
+                            placeholder="Sort by Position"
+                        />
+                    )}
+                />
                 <Column
                     sortable
                     field="join_date"

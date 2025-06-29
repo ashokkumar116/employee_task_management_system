@@ -58,7 +58,7 @@ const viewTask = async (req,res) =>{
 
     const id = req.params.id;
 
-    if(role === "admin"){
+    if(role === "Admin"){
 
         const [tasks] = await db.query("SELECT * FROM tasks WHERE id = ?",[id]);
 
