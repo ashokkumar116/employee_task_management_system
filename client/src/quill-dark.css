@@ -1,0 +1,32 @@
+/* Dark Quill toolbar & icons */
+
+.ql-toolbar {
+    background-color: #111827 !important; /* Tailwind gray-900 */
+    border: 1px solid #374151 !important; /* Tailwind gray-700 */
+  }
+  
+  /* Quill font icons */
+  .ql-toolbar .ql-picker-label,
+  .ql-toolbar .ql-picker-item {
+    color: #f3f4f6 !important;  /* Tailwind gray-100 */
+  }
+  
+  /* Quill SVG icons */
+  .ql-toolbar button svg,
+  .ql-toolbar button span.ql-stroke,
+  .ql-toolbar button span.ql-fill {
+    fill: #f3f4f6 !important;
+    stroke: #f3f4f6 !important;
+  }
+  
+  /* When active or hovered */
+  .ql-toolbar button:hover svg,
+  .ql-toolbar .ql-active svg,
+  .ql-toolbar button:hover span.ql-stroke,
+  .ql-toolbar .ql-active span.ql-stroke,
+  .ql-toolbar button:hover span.ql-fill,
+  .ql-toolbar .ql-active span.ql-fill {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+  

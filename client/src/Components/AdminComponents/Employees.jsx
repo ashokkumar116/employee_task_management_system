@@ -16,6 +16,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
+import { Link } from "react-router-dom";
 
 const Employees = () => {
     const [employees, setEmployees] = useState([]);
@@ -104,6 +105,9 @@ const Employees = () => {
     const actionbody = (rowData) => {
         return (
             <div className="flex gap-5">
+                <Link to={`/viewemployee/${rowData.id}`}>
+                    <button className="btn btn-info">View</button>
+                </Link>
                 <button
                     onClick={() => openEditModal(rowData)}
                     className="btn btn-warning"

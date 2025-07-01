@@ -8,3 +8,29 @@
 @theme {
   --font-poppins : "Poppins", sans-serif;
 }
+
+@plugin "daisyui" {
+  themes: all;
+}
+@plugin "@tailwindcss/typography";
+
+@layer components {
+  /* Force light theme on Quill Editor */
+.force-light-editor .ql-toolbar,
+.force-light-editor .ql-container {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Icon color fix */
+.force-light-editor .ql-toolbar button svg,
+.force-light-editor .ql-toolbar .ql-picker-label,
+.force-light-editor .ql-toolbar .ql-picker-item {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  color: #000000 !important;
+}
+
+}
+

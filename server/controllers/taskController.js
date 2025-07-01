@@ -41,6 +41,21 @@ const getMyTasks =async(req,res)=>{
 
 }
 
+const getHisTask =async (req,res)=>{
+    const assigned_to = req.params.id;
+
+    const sql = "SELECT * FROM tasks WHERE assigned_to = ?";
+
+    const [tasks] = await db.query(sql,[assigned_to]);
+
+    if(tasks.length === 0){
+        return res.status(400).json({message:"You don't have any tasks assigned to you"});
+    }
+
+    return res.json(tasks);
+
+}
+
 const getAllTasks = async (req,res)=>{
 
     const sql = "SELECT * FROM tasks"
@@ -150,4 +165,4 @@ const getNotStartedTasks = async (req,res) =>{
 }
 
 
-module.exports = { addTask ,getMyTasks,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus,getCompletedTasks, getProgressTasks ,getNotStartedTasks  };
+module.exports = { addTask ,getMyTasks, getHisTask ,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus,getCompletedTasks, getProgressTasks ,getNotStartedTasks  };

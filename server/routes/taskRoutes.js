@@ -1,12 +1,13 @@
 const express = require('express');
 const adminAuth = require('../middlewares/adminAuth');
-const { addTask, getMyTasks, getAllTasks, viewTask ,editTask, deleteTask, updateTaskStatus, getCompletedTasks, getProgressTasks, getNotStartedTasks} = require('../controllers/taskController');
+const { addTask, getMyTasks, getAllTasks, viewTask ,editTask, deleteTask, updateTaskStatus, getCompletedTasks, getProgressTasks, getNotStartedTasks, getHisTask} = require('../controllers/taskController');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
 
 router.post('/createtask',adminAuth,addTask);
 router.post('/getmytasks',auth,getMyTasks);
+router.get('/gethistask/:id',adminAuth,getHisTask);
 router.get('/getalltasks',adminAuth,getAllTasks);
 router.get('/task/:id',auth,viewTask);
 router.put('/task/edit/:id',adminAuth,editTask);

@@ -12,6 +12,9 @@ import { Calendar } from "primereact/calendar";
 import Swal from "sweetalert2";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
+import { Link, Navigate } from "react-router-dom";
+import { Editor } from "primereact/editor";
+import styled from "styled-components";
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -162,6 +165,9 @@ const Tasks = () => {
     const actionbody = (rowData) => {
         return (
             <div className="flex gap-2">
+                <Link to={`/viewtask/${rowData.id}`}>
+                    <button className="btn btn-info">View</button>
+                </Link>
                 <button
                     onClick={() => handleEditShow(rowData.id)}
                     className="btn btn-warning"
@@ -344,14 +350,30 @@ const Tasks = () => {
         return emp ? emp.name : "Unknown";
     };
 
-    const truncateText = (text, maxLength = 20) => {
+    const truncateText = (text, maxLength = 15) => {
         return text.length > maxLength
             ? text.slice(0, maxLength) + "..."
             : text;
     };
 
+    const StyledEditor = styled(Editor)`
+        .p-editor-toolbar {
+            background-color: #1f1f1f !important;
+            border-color: #333 !important;
+        }
+
+        .p-editor-toolbar .ql-picker-label,
+        .p-editor-toolbar .ql-picker-item,
+        .p-editor-toolbar .ql-stroke,
+        .p-editor-toolbar button svg {
+            color: white !important;
+            stroke: white !important;
+            fill: white !important;
+        }
+    `;
+
     return (
-        <div className="px-4 py-6 pl-56 pr-6 py-6">
+        <div className="px-4 py-6 pl-56 pr-6 py-6 dark">
             <h1 className="text-2xl font-bold text-center mb-5">Tasks</h1>
             <div className="flex justify-between items-center">
                 <button
@@ -391,11 +413,22 @@ const Tasks = () => {
                 ]}
                 emptyMessage="No Tasks Found"
             >
-                <Column field="title" header="Title" />
+                <Column
+                    field="title"
+                    header="Title"
+                    body={(row) => <span>{truncateText(row.title)}</span>}
+                />
                 <Column
                     field="description"
                     header="Description"
-                    body={(row) => <span>{truncateText(row.description)}</span>}
+                    body={(row) => (
+                        <div
+                            className="line-clamp-2 max-w-[300px] text-sm"
+                            dangerouslySetInnerHTML={{
+                                __html: truncateText(row.description),
+                            }}
+                        />
+                    )}
                 />
                 <Column
                     field="assigned_to"
@@ -414,7 +447,7 @@ const Tasks = () => {
                             showClear
                         />
                     )}
-                    body={(row) => getNameById(row.assigned_to)}
+                    body={(row) => getNameById(row.assigned_to).toUpperCase()}
                 />
 
                 <Column
@@ -434,7 +467,7 @@ const Tasks = () => {
                             showClear
                         />
                     )}
-                    body={(row) => getNameById(row.created_by)}
+                    body={(row) => getNameById(row.created_by).toUpperCase()}
                 />
 
                 <Column
@@ -458,6 +491,7 @@ const Tasks = () => {
                         <Tag
                             value={row.status}
                             severity={getSeverity(row.status)}
+                            icon={getIcon(row.status)}
                         />
                     )}
                 />
@@ -483,6 +517,7 @@ const Tasks = () => {
                         <Tag
                             value={row.priority}
                             severity={getSeverity(row.priority)}
+                            icon={getIcon(row.priority)}
                         />
                     )}
                 />
@@ -517,12 +552,14 @@ const Tasks = () => {
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Title"
                     />
-                    <InputTextarea
-                        className="w-100"
+                    <Editor
+                        className="w-100 dark-editor"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        onTextChange={(e) => setDescription(e.htmlValue)}
                         placeholder="Description"
+                        style={{ color: "white" }}
                     />
+
                     <Dropdown
                         className="w-100"
                         options={assignedUsersDropdown}
