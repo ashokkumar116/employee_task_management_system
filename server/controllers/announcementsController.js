@@ -25,4 +25,15 @@ const getAnnouncements = async (req,res) =>{
 
 }
 
-module.exports = {createAnnouncement,getAnnouncements};
+const getOneAnnouncement = async (req,res) =>{
+    const id = req.params.id;
+
+    const sql = "SELECT * FROM announcements WHERE id = ?";
+
+    const [announcement] = await db.query(sql,[id]);
+
+    return res.json(announcement[0]);
+
+}
+
+module.exports = {createAnnouncement,getAnnouncements , getOneAnnouncement};

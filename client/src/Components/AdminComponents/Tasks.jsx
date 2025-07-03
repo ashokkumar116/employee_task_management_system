@@ -553,11 +553,10 @@ const Tasks = () => {
                         placeholder="Title"
                     />
                     <Editor
-                        className="w-100 dark-editor"
+                        className="w-100 dark-editor bg-gray-300 text-black"
                         value={description}
                         onTextChange={(e) => setDescription(e.htmlValue)}
                         placeholder="Description"
-                        style={{ color: "white" }}
                     />
 
                     <Dropdown
@@ -608,10 +607,10 @@ const Tasks = () => {
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Title"
                     />
-                    <InputTextarea
-                        className="w-100"
+                    <Editor
+                        className="w-100 dark-editor bg-gray-300 text-black"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        onTextChange={(e) => setDescription(e.htmlValue)}
                         placeholder="Description"
                     />
                     <Dropdown

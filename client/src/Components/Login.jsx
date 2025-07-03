@@ -10,12 +10,12 @@ const Login = () => {
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const {login,loading} = useContext(AuthContext);
+    const {login,loading,errMess} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        const success = await login(email,password);
+          const success = await login(email,password);
         if(success){
             navigate('/')
         }
@@ -35,7 +35,7 @@ const Login = () => {
         <InputText type="text" name="email"  value={email} className="p-inputtext-sm" onChange={(e)=>setEmail(e.target.value)}/>
         <Password className="p-inputtext-sm" type="password" toggleMask feedback={false} name="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
         <button type="submit" className='btn btn-primary'>Login</button>
-
+        {errMess && <p className='text-error'>{errMess}</p>}
       </form>
     </div>
   )

@@ -73,7 +73,7 @@ const getAllEmployees = async (req,res)=>{
 const getAdmins = async(req,res)=>{
     const sql = "SELECT * FROM users WHERE role = ?";
 
-    const [admins] = await db.query(sql,["admin"]);
+    const [admins] = await db.query(sql,["Admin"]);
     console.log(admins)
     return res.json(admins);
 }
@@ -81,7 +81,7 @@ const getAdmins = async(req,res)=>{
 const getEmp = async(req,res)=>{
     const sql = "SELECT * FROM users WHERE role = ?";
 
-    const [emp] = await db.query(sql,["employee"]);
+    const [emp] = await db.query(sql,["Employee"]);
     console.log(emp)
     return res.json(emp);
 }

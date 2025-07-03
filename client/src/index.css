@@ -23,6 +23,24 @@
   border-color: #cbd5e1 !important;
 }
 
+@layer components {
+  .editor-content img {
+    @apply w-[200px] h-auto rounded-md my-2;
+  }
+
+  
+}
+.p-editor-content img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 0.375rem; /* rounded-md */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+
+
 /* Icon color fix */
 .force-light-editor .ql-toolbar button svg,
 .force-light-editor .ql-toolbar .ql-picker-label,

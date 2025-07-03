@@ -7,6 +7,7 @@ const path = require('path')
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const announcementsRoutes = require('./routes/announcementsRoutes');
+const taskUpdateRoutes = require('./routes/taskUpdateRoutes');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use('/api/auth',authRoutes);
 app.use('/api/tasks',taskRoutes);
 app.use('/api/announcements',announcementsRoutes);
+app.use('/api/taskupdates',taskUpdateRoutes);
 
 
 

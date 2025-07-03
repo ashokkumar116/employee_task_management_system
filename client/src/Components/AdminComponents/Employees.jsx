@@ -17,6 +17,7 @@ import { InputNumber } from "primereact/inputnumber";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { Link } from "react-router-dom";
+import { Avatar } from "primereact/avatar";
 
 const Employees = () => {
     const [employees, setEmployees] = useState([]);
@@ -125,17 +126,7 @@ const Employees = () => {
     };
 
     const profileTemplate = (rowData) => {
-        const imageUrl = rowData.profile_pic
-            ? `http://localhost:5000${rowData.profile_pic}`
-            : "http://localhost:5000/uploads/default.webp";
-
-        return (
-            <img
-                src={imageUrl}
-                alt="Profile"
-                className="w-12 h-12 rounded-full object-cover"
-            />
-        );
+        return (rowData.profile_pic ? <Avatar shape="circle" size="large" image={`http://localhost:5000${rowData.profile_pic}`} /> : <Avatar shape="circle" label={rowData.name[0].toUpperCase()} size="large" />)
     };
 
     const handleSubmit = async (e) => {

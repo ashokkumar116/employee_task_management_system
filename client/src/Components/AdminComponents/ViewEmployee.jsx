@@ -91,7 +91,7 @@ const ViewEmployee = () => {
         },
     };
 
-    const truncateText = (text, maxLength = 15) => {
+    const truncateText = (text, maxLength = 30) => {
         return text.length > maxLength
             ? text.slice(0, maxLength) + "..."
             : text;
@@ -249,9 +249,7 @@ const ViewEmployee = () => {
                         field="title"
                         header="Title"
                         body={(rowData) => {
-                            return (
-                                <span>{truncateText(rowData.title)}</span>
-                            );
+                            return <span>{truncateText(rowData.title)}</span>;
                         }}
                     />
                     <Column
@@ -259,7 +257,12 @@ const ViewEmployee = () => {
                         header="Description"
                         body={(rowData) => {
                             return (
-                                <span>{truncateText(rowData.description)}</span>
+                                <div
+                                    className="text-sm prose prose-sm max-w-none font-normal"
+                                    dangerouslySetInnerHTML={{
+                                        __html: truncateText(rowData.description),
+                                    }}
+                                />
                             );
                         }}
                     />

@@ -8,16 +8,21 @@ export const AuthProvider = ({children}) =>{
 
     const [user,setUser] = useState(null);
     const [loading , setLoading] = useState(true);
+    const [errMess,setErrMess] = useState(null);
 
     const login = async (email,password)=>{
-        const response = await axios.post('/auth/login',{email,password},{withCredentials:true});
-        console.log(email,password);
-        if(response.status === 200) {
-             fetchUser();
-            return true;
+        try {
+            const response = await axios.post('/auth/login',{email,password},{withCredentials:true});
+            console.log(email,password);
+            if(response.status === 200) {
+                 fetchUser();
+                return true;
+            }
+        } catch (error) {
+            setUser(null);
+            setErrMess(error.response.data.message)
+            return false;
         }
-        setUser(null);
-        return false;
 
     }
 
@@ -52,7 +57,7 @@ export const AuthProvider = ({children}) =>{
 
 
 
-    return <AuthContext.Provider value={{login,user,loading,logout}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{login,user,loading,logout,errMess}}>{children}</AuthContext.Provider>
 
 
 }

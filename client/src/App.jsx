@@ -13,6 +13,7 @@ import Announcements from './Components/AdminComponents/Announcements'
 import Settings from './Components/AdminComponents/Settings'
 import ViewTask from './Components/AdminComponents/ViewTask'
 import ViewEmployee from './Components/AdminComponents/ViewEmployee'
+import ViewAnnouncement from './Components/AdminComponents/ViewAnnouncement'
 
 function App() {
 
@@ -32,9 +33,9 @@ function App() {
           <Route path='/employees' element={user ? <AdminProtectedRoutes><Employees/></AdminProtectedRoutes>:<Navigate to={'/login'}/>} />
           <Route path='/announcements' element={user ? <AdminProtectedRoutes><Announcements/></AdminProtectedRoutes>: <Navigate to={'/login'}/>} />
           <Route path='/settings' element={user ? <AdminProtectedRoutes><Settings/></AdminProtectedRoutes> : <Navigate to={'/login'}/> } />
-          <Route path='/viewtask/:id' element={user ? <ProtectedRoutes><ViewTask/></ProtectedRoutes> : <Navigate to={'/login'}/> } />
-          <Route path='/viewemployee/:id' element={user ? <ProtectedRoutes><ViewEmployee/></ProtectedRoutes>: <Navigate to={'/login'}/>} />
-          
+          <Route path='/viewtask/:id' element={user ? <AdminProtectedRoutes><ViewTask/></AdminProtectedRoutes> : <Navigate to={'/login'}/> } />
+          <Route path='/viewemployee/:id' element={user ? <AdminProtectedRoutes><ViewEmployee/></AdminProtectedRoutes>: <Navigate to={'/login'}/>} />
+          <Route path='/viewannouncement/:id' element={user ? <AdminProtectedRoutes><ViewAnnouncement/></AdminProtectedRoutes> :<Navigate to={'/login'}/> } />
         </Routes>
       </BrowserRouter>
     </>
