@@ -4,7 +4,6 @@ import Home from '../../Pages/Home'
 const Admindashboard = () => {
   return (
     <div>
-      <Home/>
     </div>
   )
 }

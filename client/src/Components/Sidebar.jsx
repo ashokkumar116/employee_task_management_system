@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthContext";
+import { PanelMenu } from "primereact/panelmenu";
 
 const Sidebar = () => {
   const { user, loading, logout } = useContext(AuthContext);
@@ -11,6 +12,21 @@ const Sidebar = () => {
   const handleLogout = async () => {
     await logout();
   };
+
+  const taskItemsMenu = [
+    {
+      label:'Tasks',
+      items:[{
+        label:"Assigned Tasks"
+      },
+      {
+        label:"Completed Tasks"
+      }
+    
+    ]
+    }
+
+  ]
 
   return (
     <div className="fixed top-0 left-0 h-full w-52 bg-gray-900 p-4 shadow-lg flex flex-col items-center gap-10 z-50">
@@ -31,7 +47,9 @@ const Sidebar = () => {
         >
           Dashboard
         </Link>
-        <Link
+        {user.role === "Admin" && 
+          <>
+            <Link
           to="/employees"
           className="hover:bg-gray-800 w-full text-center py-2 rounded-md"
         >
@@ -56,6 +74,34 @@ const Sidebar = () => {
         >
           Settings
         </Link>
+          </>
+        }
+
+
+        {user.role === "Employee" && <>
+
+        <PanelMenu
+          to="/employees"
+          className="w-full text-center py-2 rounded-md"
+          model={taskItemsMenu}
+        >
+        Tasks
+        </PanelMenu>
+        <Link
+          to="/announcements"
+          className="hover:bg-gray-800 w-full text-center py-2 rounded-md"
+        >
+          Announcements
+        </Link>
+        <Link
+          to="/settings"
+          className="hover:bg-gray-800 w-full text-center py-2 rounded-md"
+        >
+          Settings
+        </Link>
+
+        </>}
+
         <button
           onClick={handleLogout}
           className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md mt-6"

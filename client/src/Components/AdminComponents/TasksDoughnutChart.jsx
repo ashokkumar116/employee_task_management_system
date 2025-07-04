@@ -28,7 +28,7 @@ const TasksDoughnutChart = ({ completed, inProgress, notStarted }) => {
   };
 
   return (
-    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-full max-w-sm grid place-content-center">
+    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-full max-w-sm grid place-content-center h-48">
       <Doughnut data={data} options={options} />
     </div>
   );

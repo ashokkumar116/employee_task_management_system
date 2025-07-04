@@ -98,12 +98,14 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen w-full w=[100%] bg-gray-950 px-4 py-6 pl-56 pr-6 py-6 text-white flex flex-col items-center gap-8">
+        <div className="min-h-screen w-full w=[100%] bg-gray-950 px-4 py-6 pl-56 pr-6 py-6 text-white flex flex-col items-center justify-center gap-8">
           <h1 className="text-3xl font-bold uppercase text-center">
             Welcome, {user.name.toUpperCase()}
           </h1>
       
-          <div className="bg-gray-800 w-full max-w-3xl rounded-xl p-5 shadow-md">
+          <div className="flex flex-col md:flex-row gap-6 items-stretch justify-center w-full p-10">
+          <div className="bg-gray-800 flex-1 rounded-xl p-5 shadow-md min-h-[320px]">
+
             <h2 className="text-xl font-semibold mb-4 border-b border-gray-600 pb-2">
               Employees Overview
             </h2>
@@ -114,7 +116,7 @@ const Home = () => {
                   <span className="text-md font-medium">Total</span>
                   <span className="text-xl font-bold">{employeesCount}</span>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-3">
                   <div className="bg-gray-900 p-4 w-1/2 rounded-lg flex flex-col items-center">
                     <span className="text-md font-medium">Admins</span>
                     <span className="text-xl font-bold">{adminCount}</span>
@@ -135,7 +137,7 @@ const Home = () => {
             </div>
           </div>
       
-          <div className="bg-gray-800 w-full max-w-3xl rounded-xl p-5 shadow-md">
+          <div className="bg-gray-800 flex-1 rounded-xl p-5 shadow-md min-h-[320px]">
             <h2 className="text-xl font-semibold mb-4 border-b border-gray-600 pb-2">
               Tasks Overview
             </h2>
@@ -146,23 +148,23 @@ const Home = () => {
                   <span className="text-md font-medium">Total Tasks</span>
                   <span className="text-xl font-bold">{totalTaskCount}</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="bg-gray-900 p-3 rounded-lg flex flex-col items-center">
-                    <span className="text-sm font-medium">Completed</span>
+                <div className="flex gap-3 ">
+                  <div className="bg-gray-900 p-3 w-25 rounded-lg flex flex-col items-center">
+                    <span className="text-[13px] font-medium">Completed</span>
                     <span className="text-lg font-bold">{completedCount}</span>
                   </div>
-                  <div className="bg-gray-900 p-3 rounded-lg flex flex-col items-center">
-                    <span className="text-sm font-medium">In Progress</span>
+                  <div className="bg-gray-900 p-3 w-25 rounded-lg flex flex-col items-center">
+                    <span className="text-[13px] font-medium">In Progress</span>
                     <span className="text-lg font-bold">{progressCount}</span>
                   </div>
-                  <div className="bg-gray-900 p-3 rounded-lg flex flex-col items-center">
-                    <span className="text-sm font-medium">Not Started</span>
+                  <div className="bg-gray-900 p-3 w-25 rounded-lg flex flex-col items-center">
+                    <span className="text-[13px] font-medium">Not Started</span>
                     <span className="text-lg font-bold">{notStartedCount}</span>
                   </div>
                 </div>
               </div>
       
-              <div className="w-full sm:w-[40%]">
+              <div className="w-full sm:w-[40%] ml-4">
                 <TasksDoughnutChart
                   completed={completedCount}
                   inProgress={progressCount}
@@ -170,6 +172,7 @@ const Home = () => {
                 />
               </div>
             </div>
+          </div>
           </div>
         </div>
       );

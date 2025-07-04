@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 router.post('/createtask',adminAuth,addTask);
-router.post('/getmytasks',auth,getMyTasks);
+router.get('/getmytasks',auth,getMyTasks);
 router.get('/gethistask/:id',adminAuth,getHisTask);
 router.get('/getalltasks',adminAuth,getAllTasks);
 router.get('/task/:id',auth,viewTask);

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../Contexts/AuthContext'
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoutes = ({children}) => {
+const EmployeeProtectedRoutes = ({children}) => {
 
     const {user,loading} = useContext(AuthContext);
 
@@ -10,7 +10,8 @@ const ProtectedRoutes = ({children}) => {
         return <div>Loading...</div>
       }
 
-    return user ? children : <Navigate to={'/login'} />
+    return user.role === "Employee" ? children : <Navigate to={'/login'} />
+  
 }
 
-export default ProtectedRoutes
+export default EmployeeProtectedRoutes

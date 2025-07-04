@@ -139,7 +139,7 @@ const Employees = () => {
         formData.append("password", password);
         formData.append("role", role);
         formData.append("position", position);
-        formData.append("contact", contact);
+        formData.append("contact", contact?.toString() || "");
         const formattedDate = join_date
             ? `${join_date.getFullYear()}-${String(
                   join_date.getMonth() + 1
@@ -445,7 +445,16 @@ const Employees = () => {
                 header="Edit Employee"
                 draggable={false}
                 maximizable
-                onHide={() => setEditVisible(false)}
+                onHide={() => {
+                    if (!editVisible) return;
+                    setEditVisible(false);
+                    setName("");
+                    setEmail("");
+                    setContact(null);
+                    setRole("");
+                    setPosition("");
+                    setJoin_Date("")
+                }}
             >
                 <form
                     onSubmit={handleEditSubmit}

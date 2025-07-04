@@ -2,9 +2,9 @@ import React from 'react'
 
 const Settings = () => {
   return (
-    <div>
+    <div className='px-4 py-6 pl-56 pr-6 py-6'>
       Settings
-Settings
+      <h1>Coming Soon ...</h1>
     </div>
   )
 }
