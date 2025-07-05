@@ -25,7 +25,7 @@ router.post(
     addEmployee
 );
 router.post("/login", login);
-router.get("/employees", adminAuth, getAllEmployees);
+router.get("/employees", auth, getAllEmployees);
 router.post("/logout", logout);
 router.get("/employees/:id", adminAuth, getSpecificUser);
 router.put("/employee/edit/:id", adminAuth,upload.single("profile_pic"), editUser);

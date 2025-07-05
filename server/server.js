@@ -8,6 +8,8 @@ const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const announcementsRoutes = require('./routes/announcementsRoutes');
 const taskUpdateRoutes = require('./routes/taskUpdateRoutes');
+const rolesRoute = require('./routes/rolesRoute');
+const positionRoutes = require('./routes/positionRoutes');
 
 const app = express();
 
@@ -24,6 +26,8 @@ app.use('/api/auth',authRoutes);
 app.use('/api/tasks',taskRoutes);
 app.use('/api/announcements',announcementsRoutes);
 app.use('/api/taskupdates',taskUpdateRoutes);
+app.use('/api/roles',rolesRoute);
+app.use('/api/positions',positionRoutes);
 
 
 

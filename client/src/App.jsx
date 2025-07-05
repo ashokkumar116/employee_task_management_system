@@ -16,6 +16,12 @@ import ViewEmployee from "./Components/AdminComponents/ViewEmployee";
 import ViewAnnouncement from "./Components/AdminComponents/ViewAnnouncement";
 import EmployeeProtectedRoutes from "./utils/EmployeeProtectedRoutes";
 import EmployeeDashboard from "./Components/EmployeeComponents/EmployeeDashboard";
+import AssignedTasks from "./Components/EmployeeComponents/AssignedTasks";
+import CompletedTasks from "./Components/EmployeeComponents/CompletedTasks";
+import EmployeeAnnouncements from "./Components/EmployeeComponents/EmployeeAnnouncements";
+import EmployeeSettings from "./Components/EmployeeComponents/EmployeeSettings";
+import Roles from "./Components/AdminComponents/Roles";
+import Positions from "./Components/AdminComponents/Positions";
 
 function App() {
     const { user, loading } = useContext(AuthContext);
@@ -103,9 +109,9 @@ function App() {
                         path="/viewtask/:id"
                         element={
                             user ? (
-                                <AdminProtectedRoutes>
+                                <ProtectedRoutes>
                                     <ViewTask />
-                                </AdminProtectedRoutes>
+                                </ProtectedRoutes>
                             ) : (
                                 <Navigate to={"/login"} />
                             )
@@ -127,26 +133,21 @@ function App() {
                         path="/viewannouncement/:id"
                         element={
                             user ? (
-                                <AdminProtectedRoutes>
+                                <ProtectedRoutes>
                                     <ViewAnnouncement />
-                                </AdminProtectedRoutes>
+                                </ProtectedRoutes>
                             ) : (
                                 <Navigate to={"/login"} />
                             )
                         }
                     />
-                    <Route
-                        path="/nk"
-                        element={
-                            user ? (
-                                <EmployeeProtectedRoutes>
-                                    <EmployeeDashboard />
-                                </EmployeeProtectedRoutes>
-                            ) : (
-                                <Navigate to={"/login"} />
-                            )
-                        }
-                    />
+                    <Route path="/my-tasks" element={user ? <EmployeeProtectedRoutes><AssignedTasks/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/completed-tasks" element={user ? <EmployeeProtectedRoutes><CompletedTasks/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/empannouncement" element={user ? <EmployeeProtectedRoutes><EmployeeAnnouncements/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/empsettings" element={user ? <EmployeeProtectedRoutes><EmployeeSettings/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/roles" element={user ? <AdminProtectedRoutes><Roles/></AdminProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/positions" element={user ? <AdminProtectedRoutes><Positions/></AdminProtectedRoutes> : <Navigate to={'/login'} />} />
+                    
                 </Routes>
             </BrowserRouter>
         </>

@@ -34,7 +34,7 @@ const getMyTasks =async(req,res)=>{
     const [tasks] = await db.query(sql,[assigned_to]);
 
     if(tasks.length === 0){
-        return res.json({message:"You don't have any tasks assigned to you"});
+        return res.status(400).json({message:"You don't have any tasks assigned to you"});
     }
 
     return res.json(tasks);
@@ -164,5 +164,34 @@ const getNotStartedTasks = async (req,res) =>{
     return res.json(notstarted);
 }
 
+const fetchAssignedTasks = async(req,res)=>{
 
-module.exports = { addTask ,getMyTasks, getHisTask ,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus,getCompletedTasks, getProgressTasks ,getNotStartedTasks  };
+    const id = req.user.id;
+
+    const sql = "SELECT * FROM tasks WHERE status != ? AND assigned_to = ?"
+
+    const [AssignedTasks] = await db.query(sql,["Completed",id]);
+
+    if(AssignedTasks.length === 0){
+        return res.status(400).json({message:"No Active Tasks"})
+    }
+
+    return res.status(200).json(AssignedTasks);
+
+}
+
+const fetchCompletedTasks = async(req,res)=>{
+    const id = req.user.id;
+
+    const sql = "SELECT * FROM tasks WHERE status = ? AND assigned_to = ?"
+
+    const [CompletedTasks] = await db.query(sql,["Completed",id]);
+
+    if(CompletedTasks.length === 0){
+        return res.status(400).json({message:"No Completed Tasks"})
+    }
+
+    return res.status(200).json(CompletedTasks);
+}
+
+module.exports = { addTask ,getMyTasks, getHisTask ,getAllTasks ,viewTask,editTask,deleteTask,updateTaskStatus,getCompletedTasks, getProgressTasks ,getNotStartedTasks ,fetchAssignedTasks ,fetchCompletedTasks };

@@ -102,7 +102,7 @@ const EmployeeDashboard = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="space-y-4 text-sm text-gray-200">
+                            <div className="space-y-4 text-sm text-gray-300 italic ">
                                 <p>
                                     <span className="font-semibold">Name:</span>{" "}
                                     {user.name}
@@ -173,23 +173,103 @@ const EmployeeDashboard = () => {
                             {completedTasks.length === 0 &&
                             inProgressTasks.length === 0 &&
                             notStartedTasks.length === 0 ? (
-                                <div className="flex flex-col items-center justify-center text-gray-400 py-10">
+                                <div className="flex flex-col items-center justify-center py-10 text-gray-400">
                                     <svg
+                                        width="220"
+                                        height="220"
+                                        viewBox="0 0 220 220"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-16 h-16 mb-4 text-gray-600"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
+                                        className="mb-4"
                                     >
+                                        <defs>
+                                            <linearGradient
+                                                id="grad"
+                                                x1="0"
+                                                y1="0"
+                                                x2="1"
+                                                y2="1"
+                                            >
+                                                <stop
+                                                    offset="0%"
+                                                    stopColor="#4b5563"
+                                                />
+                                                <stop
+                                                    offset="100%"
+                                                    stopColor="#1f2937"
+                                                />
+                                            </linearGradient>
+                                        </defs>
+
+                                        <rect
+                                            x="40"
+                                            y="30"
+                                            width="140"
+                                            height="160"
+                                            rx="12"
+                                            fill="url(#grad)"
+                                        />
+                                        <rect
+                                            x="50"
+                                            y="45"
+                                            width="120"
+                                            height="20"
+                                            rx="4"
+                                            fill="#374151"
+                                        />
+                                        <rect
+                                            x="50"
+                                            y="75"
+                                            width="90"
+                                            height="14"
+                                            rx="3"
+                                            fill="#4b5563"
+                                        />
+                                        <rect
+                                            x="50"
+                                            y="100"
+                                            width="60"
+                                            height="14"
+                                            rx="3"
+                                            fill="#4b5563"
+                                        />
+                                        <rect
+                                            x="50"
+                                            y="125"
+                                            width="70"
+                                            height="14"
+                                            rx="3"
+                                            fill="#4b5563"
+                                        />
+
+                                        <circle
+                                            cx="160"
+                                            cy="140"
+                                            r="20"
+                                            fill="#111827"
+                                            stroke="#6b7280"
+                                            strokeWidth="2"
+                                        />
                                         <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M9 17v-6a1 1 0 012 0v6m4-6v6a1 1 0 102 0v-6a1 1 0 00-2 0zm-6 0a1 1 0 10-2 0v6a1 1 0 002 0v-6zm3-8a9 9 0 100 18 9 9 0 000-18z"
+                                            d="M160 120 A20 20 0 0 1 180 140 L160 140 Z"
+                                            fill="#ef4444"
+                                        />
+                                        <path
+                                            d="M180 140 A20 20 0 1 1 160 120 L160 140 Z"
+                                            fill="#eab308"
+                                        />
+
+                                        <ellipse
+                                            cx="110"
+                                            cy="200"
+                                            rx="70"
+                                            ry="10"
+                                            fill="#1f2937"
+                                            opacity="0.6"
                                         />
                                     </svg>
-                                    <p className="text-sm">
-                                        No task data available
+
+                                    <p className="text-base font-medium text-gray-500">
+                                        No task data available to visualize
                                     </p>
                                 </div>
                             ) : (

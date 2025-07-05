@@ -7,6 +7,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Tag } from "primereact/tag";
+import { ArrowLeftCircle } from "lucide-react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ViewEmployee = () => {
@@ -157,12 +158,12 @@ const ViewEmployee = () => {
     return (
         <div className="px-4 py-6 pl-56 pr-6 py-6">
             <button
-                className="btn btn-error mb-5 flex items-center justify-center gap-1"
-                onClick={() => navigate(-1)}
-            >
-                <i className="pi pi-chevron-circle-left"></i>
-                <span className="text-error-content">Back</span>
-            </button>
+        className="mb-6 flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition"
+        onClick={() => navigate(-1)}
+      >
+        <ArrowLeftCircle size={18} />
+        Back
+      </button>
             <div className="bg-gray-900 rounded-xl shadow-xl flex gap-5 flex-col p-8">
                 <div className="profile flex gap-5 justify-between ">
                     <div className="flex gap-5">

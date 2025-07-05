@@ -1,6 +1,6 @@
 const express = require('express');
 const adminAuth = require('../middlewares/adminAuth');
-const { addTask, getMyTasks, getAllTasks, viewTask ,editTask, deleteTask, updateTaskStatus, getCompletedTasks, getProgressTasks, getNotStartedTasks, getHisTask} = require('../controllers/taskController');
+const { addTask, getMyTasks, getAllTasks, viewTask ,editTask, deleteTask, updateTaskStatus, getCompletedTasks, getProgressTasks, getNotStartedTasks, getHisTask, fetchAssignedTasks, fetchCompletedTasks} = require('../controllers/taskController');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
@@ -16,6 +16,8 @@ router.put('/task/updatestatus/:id',auth,updateTaskStatus);
 router.get('/completed',adminAuth,getCompletedTasks);
 router.get('/progress',adminAuth,getProgressTasks);
 router.get('/notstarted',adminAuth,getNotStartedTasks);
+router.get('/assignedtasks',auth,fetchAssignedTasks);
+router.get('/completedtasks',auth,fetchCompletedTasks);
 
 
 module.exports = router;
