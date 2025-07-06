@@ -102,18 +102,36 @@ APP_PASS = your_gmail_pass
 
 ## 🖼️ UI Preview
 
-![TaskPilot](https://github.com/user-attachments/assets/d7091417-91ad-4919-96d0-9ac7db3242e4)
-![Screenshot (185)](https://github.com/user-attachments/assets/7a2e3424-f967-4c73-8609-fff2980da6a7)
-![Screenshot 2025-07-06 233557](https://github.com/user-attachments/assets/e3f58f44-086a-4cdf-919a-2ad680d3ac0e)
-![Screenshot 2025-07-06 233615](https://github.com/user-attachments/assets/af4fd83e-3357-42c9-a222-83ef85ad0278)
-![Screenshot 2025-07-06 233632](https://github.com/user-attachments/assets/f0b2df81-a0d3-4352-a476-65d1e8ea53b5)
-![Screenshot 2025-07-06 233737](https://github.com/user-attachments/assets/8571507f-93ea-48a8-bd86-d12d3936dcae)
-![Screenshot 2025-07-06 233755](https://github.com/user-attachments/assets/26b37b1d-7c18-4948-9f0c-f7956f683c99)
-![Screenshot 2025-07-06 233815](https://github.com/user-attachments/assets/889baecb-d738-4d09-bb9c-98e64f1761fc)
-![Screenshot 2025-07-06 233940](https://github.com/user-attachments/assets/d0c9d11d-0cbe-42f9-a514-6084e8bfc0b5)
-![Screenshot 2025-07-06 234029](https://github.com/user-attachments/assets/343f48d5-8e32-482a-9136-9ccaa3d8d45e)
-![Screenshot 2025-07-06 234051](https://github.com/user-attachments/assets/8c6b310b-4a71-4b90-90dc-f125ec8b6ed1)
+### 🔐 Login & Dashboard
 
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/d7091417-91ad-4919-96d0-9ac7db3242e4" width="300"/>
+  <img src="https://github.com/user-attachments/assets/7a2e3424-f967-4c73-8609-fff2980da6a7" width="300"/>
+  <img src="https://github.com/user-attachments/assets/e3f58f44-086a-4cdf-919a-2ad680d3ac0e" width="300"/>
+</p>
+
+### 📋 Task Management
+
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/af4fd83e-3357-42c9-a222-83ef85ad0278" width="300"/>
+  <img src="https://github.com/user-attachments/assets/f0b2df81-a0d3-4352-a476-65d1e8ea53b5" width="300"/>
+  <img src="https://github.com/user-attachments/assets/8571507f-93ea-48a8-bd86-d12d3936dcae" width="300"/>
+</p>
+
+### ✅ Task View and Update
+
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/26b37b1d-7c18-4948-9f0c-f7956f683c99" width="300"/>
+  <img src="https://github.com/user-attachments/assets/889baecb-d738-4d09-bb9c-98e64f1761fc" width="300"/>
+  <img src="https://github.com/user-attachments/assets/d0c9d11d-0cbe-42f9-a514-6084e8bfc0b5" width="300"/>
+</p>
+
+### 👤 Profile & Final Screens
+
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/343f48d5-8e32-482a-9136-9ccaa3d8d45e" width="300"/>
+  <img src="https://github.com/user-attachments/assets/8c6b310b-4a71-4b90-90dc-f125ec8b6ed1" width="300"/>
+</p>
 
 
 ## 📦 Deployment
