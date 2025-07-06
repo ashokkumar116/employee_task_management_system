@@ -33,7 +33,7 @@ const ForgotPassword = () => {
         text: error.response?.data?.message || 'Failed to send OTP',
       });
     } finally {
-      setLoading(false);
+      setLoading(false);    
     }
   };
 
