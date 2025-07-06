@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
-        
+import LoadingComponent from '../LoadingComponent';
 
 const Login = () => {
 
@@ -12,17 +12,27 @@ const Login = () => {
     const [password,setPassword] = useState("");
     const {login,loading,errMess} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [loadingState,setLoadingState] = useState(false);
 
     const handleSubmit = async(e) =>{
+
         e.preventDefault();
+        setLoadingState(true);
+         try {
           const success = await login(email,password);
-        if(success){
-            navigate('/')
-        }
+          if(success){
+              navigate('/')
+          }
+         } catch (error) {
+            console.log(error)
+         }
+         finally{
+          setLoadingState(false)
+         }
     }
 
    if(loading){
-    return <div>Loading</div>
+    return <LoadingComponent/>
    }
    
 
@@ -34,7 +44,7 @@ const Login = () => {
 
         <InputText type="text" name="email"  value={email} className="p-inputtext-sm" onChange={(e)=>setEmail(e.target.value)}/>
         <Password className="p-inputtext-sm" type="password" toggleMask feedback={false} name="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-        <button type="submit" className='btn btn-primary'>Login</button>
+        {loading ? <button type="submit" className='btn btn-primary' disabled>Please Wait <span className="loading loading-dots loading-md"></span></button> :<button type="submit" className='btn btn-primary'>Login</button>}
         {errMess && <p className='text-error'>{errMess}</p>}
       </form>
     </div>

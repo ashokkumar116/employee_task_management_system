@@ -79,7 +79,7 @@ const ProfileSettings = () => {
     }
 
     useEffect(()=>{
-        setImageUrl(`http://localhost:5000${user.profile_pic}`)
+        setImageUrl(`https://employee-task-management-system-rye4.onrender.com${user.profile_pic}`)
     },[])
 
     return (

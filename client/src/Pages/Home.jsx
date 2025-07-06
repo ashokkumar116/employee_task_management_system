@@ -5,6 +5,7 @@ import axios from "../axios";
 import TasksDoughnutChart from "../Components/AdminComponents/TasksDoughnutChart.jsx";
 import EmployeeDoughnutChart from "../Components/AdminComponents/EmployeeChart";
 import PositionChart from "../Components/AdminComponents/PositionChart";
+import LoadingComponent from "../LoadingComponent";
 
 const Home = () => {
     const { user, loading } = useContext(AuthContext);
@@ -16,6 +17,8 @@ const Home = () => {
     const [progressCount, setProgressCount] = useState("");
     const [notStartedCount, setNotStartedCount] = useState("");
     const [positionCounts, setPositionCounts] = useState([]);
+    const [dashboardLoading, setDashboardLoading] = useState(true);
+    
 
     const fetchEmployeeCount = async () => {
         try {
@@ -90,19 +93,33 @@ const Home = () => {
     };
 
     useEffect(() => {
-        fetchEmployeeCount();
-        fetchAdminCount();
-        fetchEmpCount();
-        fetchTasksCount();
-        fetchCompletedCount();
-        fetchProgressCount();
-        fetchNotStartedCount();
-        fetchPositionCounts();
+        const fetchAllData = async () => {
+            try {
+                await Promise.all([
+                    fetchEmployeeCount(),
+                    fetchAdminCount(),
+                    fetchEmpCount(),
+                    fetchTasksCount(),
+                    fetchCompletedCount(),
+                    fetchProgressCount(),
+                    fetchNotStartedCount(),
+                    fetchPositionCounts()
+                ]);
+            } catch (err) {
+                console.log("Error loading dashboard data:", err);
+            } finally {
+                setDashboardLoading(false); // Stop loading after all
+            }
+        };
+    
+        fetchAllData();
     }, []);
+    
 
-    if (loading) {
-        return <div className="text-white text-center mt-10">Loading...</div>;
+    if (dashboardLoading) {
+        return <LoadingComponent />;
     }
+    
 
     return (
         <div className="min-h-screen w-full bg-gray-950 px-6 py-6 pl-56 text-white">

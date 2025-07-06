@@ -41,6 +41,8 @@ const PositionChart = ({ data }) => {
     },
   };
 
+  
+
   return <Chart type="doughnut" data={chartData} options={options} />;
 };
 

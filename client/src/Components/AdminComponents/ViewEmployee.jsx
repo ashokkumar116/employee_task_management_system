@@ -170,7 +170,7 @@ const ViewEmployee = () => {
                         <div className="h-110 avatar w-70 ">
                             {employee.profile_pic ? (
                                 <img
-                                    src={`http://localhost:5000${employee.profile_pic}`}
+                                    src={`https://employee-task-management-system-rye4.onrender.com${employee.profile_pic}`}
                                     className="rounded-md"
                                 />
                             ) : (

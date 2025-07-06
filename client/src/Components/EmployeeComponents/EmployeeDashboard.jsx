@@ -3,14 +3,19 @@ import { AuthContext } from "../../Contexts/AuthContext";
 import axios from "../../axios";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
+import LoadingComponent from "../../LoadingComponent";
 
 const EmployeeDashboard = () => {
-    const { user } = useContext(AuthContext);
+    const { user,loading } = useContext(AuthContext);
     const [myTasks, setMyTasks] = useState({});
     const [completedTasks, setCompletedTasks] = useState([]);
     const [notStartedTasks, setNotStartedTasks] = useState([]);
     const [inProgressTasks, setInProgressTasks] = useState([]);
     const taskList = Object.values(myTasks);
+
+    if(loading){
+        return <LoadingComponent/>;
+    }
 
     const fetchMyTasks = async () => {
         try {
@@ -89,7 +94,7 @@ const EmployeeDashboard = () => {
                             <div className="h-110 avatar w-70 ">
                                 {user.profile_pic ? (
                                     <img
-                                        src={`http://localhost:5000${user.profile_pic}`}
+                                        src={`https://employee-task-management-system-rye4.onrender.com${user.profile_pic}`}
                                         className="rounded-md"
                                     />
                                 ) : (

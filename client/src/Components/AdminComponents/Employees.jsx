@@ -127,7 +127,7 @@ const Employees = () => {
 
     const profileTemplate = (rowData) => {
         return rowData.profile_pic ? (
-            <Avatar shape="circle" size="large" image={`http://localhost:5000${rowData.profile_pic}`} />
+            <Avatar shape="circle" size="large" image={`https://employee-task-management-system-rye4.onrender.com${rowData.profile_pic}`} />
         ) : (
             <Avatar shape="circle" label={rowData.name[0].toUpperCase()} size="large" />
         );

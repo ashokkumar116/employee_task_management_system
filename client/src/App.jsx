@@ -25,12 +25,13 @@ import PasswordChange from "./Pages/Settings/PasswordChange";
 import ForgotPassword from "./Pages/Settings/ForgotPassword";
 import OTP from "./Pages/Settings/OTP";
 import ResetPassword from "./Pages/Settings/ResetPassword";
+import LoadingComponent from "./LoadingComponent";
 
 function App() {
     const { user, loading } = useContext(AuthContext);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingComponent/>;
     }
     return (
         <>

@@ -184,7 +184,7 @@ const ViewTask = () => {
             <div className="flex items-center gap-3">
               {profileImages[task.user_id] ? (
                 <Avatar
-                  image={`http://localhost:5000${profileImages[task.user_id]}`}
+                  image={`https://employee-task-management-system-rye4.onrender.com${profileImages[task.user_id]}`}
                   shape="circle"
                 />
               ) : (

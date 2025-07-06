@@ -15,13 +15,14 @@ import {
   ShieldCheck,
   Briefcase
 } from "lucide-react";
+import LoadingComponent from "../LoadingComponent";
 
 const Sidebar = () => {
   const { user, loading, logout } = useContext(AuthContext);
   const location = useLocation();
   const [taskMenuOpen, setTaskMenuOpen] = useState(false);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingComponent/>;
   if (!user) return null;
 
   const handleLogout = async () => {
@@ -39,8 +40,8 @@ const Sidebar = () => {
         <img
           src={ 
             user.profile_pic
-              ? `http://localhost:5000${user.profile_pic}`
-              : "http://localhost:5000/uploads/default.webp"
+              ? `https://employee-task-management-system-rye4.onrender.com${user.profile_pic}`
+              : "https://employee-task-management-system-rye4.onrender.com/uploads/default.webp"
           }
           alt="Profile"
           className="w-16 h-16 rounded-full border-2 border-gray-600"
