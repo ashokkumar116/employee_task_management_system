@@ -102,6 +102,8 @@ APP_PASS = your_gmail_pass
 
 ## 🖼️ UI Preview
 
+![TaskPilot](https://github.com/user-attachments/assets/d7091417-91ad-4919-96d0-9ac7db3242e4)
+
 
 
 ## 📦 Deployment
@@ -140,5 +142,3 @@ Feel free to fork the project and open pull requests!
 Ashok Kumar – [@ashokkumar116]([https://github.com/yourusername](https://github.com/ashokkumar116))
 
 ```
-
-##
