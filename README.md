@@ -102,20 +102,22 @@ APP_PASS = your_gmail_pass
 
 ## 🖼️ UI Preview
 
-### 🔐 Login & Dashboard
+### 🔐 Admin and Employee Dashboard
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/d7091417-91ad-4919-96d0-9ac7db3242e4" width="300"/>
   <img src="https://github.com/user-attachments/assets/7a2e3424-f967-4c73-8609-fff2980da6a7" width="300"/>
-  <img src="https://github.com/user-attachments/assets/e3f58f44-086a-4cdf-919a-2ad680d3ac0e" width="300"/>
+    <img src="https://github.com/user-attachments/assets/8571507f-93ea-48a8-bd86-d12d3936dcae" width="300"/>
+
 </p>
 
-### 📋 Task Management
+### 📋 Employee Management and Employee View
 
 <p float="left">
+  <img src="https://github.com/user-attachments/assets/e3f58f44-086a-4cdf-919a-2ad680d3ac0e" width="300"/>
+  <img src="https://github.com/user-attachments/assets/d0c9d11d-0cbe-42f9-a514-6084e8bfc0b5" width="300"/>
   <img src="https://github.com/user-attachments/assets/af4fd83e-3357-42c9-a222-83ef85ad0278" width="300"/>
   <img src="https://github.com/user-attachments/assets/f0b2df81-a0d3-4352-a476-65d1e8ea53b5" width="300"/>
-  <img src="https://github.com/user-attachments/assets/8571507f-93ea-48a8-bd86-d12d3936dcae" width="300"/>
+
 </p>
 
 ### ✅ Task View and Update
@@ -123,7 +125,7 @@ APP_PASS = your_gmail_pass
 <p float="left">
   <img src="https://github.com/user-attachments/assets/26b37b1d-7c18-4948-9f0c-f7956f683c99" width="300"/>
   <img src="https://github.com/user-attachments/assets/889baecb-d738-4d09-bb9c-98e64f1761fc" width="300"/>
-  <img src="https://github.com/user-attachments/assets/d0c9d11d-0cbe-42f9-a514-6084e8bfc0b5" width="300"/>
+
 </p>
 
 ### 👤 Profile & Final Screens
