@@ -3,6 +3,7 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const nodemailer = require('nodemailer')
 
 const addEmployee = async (req,res) =>{
     const {name,email,password,role,position,join_date,contact} = req.body;
@@ -168,6 +169,142 @@ const logout = (req,res) =>{
 }
 
 
+const getPositionCounts = async (req, res) => {
+    try {
+      const [rows] = await db.execute(`
+        SELECT position, COUNT(*) as count 
+        FROM users 
+        GROUP BY position
+      `);
+  
+      res.status(200).json(rows);
+    } catch (error) {
+      console.error("Error fetching position counts:", error);
+      res.status(500).json({ error: "Failed to fetch position counts" });
+    }
+  };
+
+  const changePassword = async (req, res) => {
+    const id = req.user.id;
+    
+    const {currentPassword, newPassword } = req.body;
+    try {
+        
+        const sql = "UPDATE users SET password = ? WHERE id = ?";
+
+        const [users] = await db.query("SELECT * FROM users WHERE id = ?",[id]);
+
+        const user = users[0];
+
+        const isMatch = await bcrypt.compare(currentPassword,user.password);
+
+        if(!isMatch){
+            return res.status(400).json({message:"Password is wrong"});
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword,salt);
+
+        await db.query(sql,[hashedPassword,id]);
+  
+        return res.json({ message: "Password changed successfully" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+  };
+
+  const sendOtp = async (req,res) =>{
+
+    const id = req.user.id;
+
+    try {
+        const [users] = await db.query("SELECT * FROM users WHERE id = ?",[id]);
+        if(users.length === 0){
+            return res.status(400).json({message:"No users Found"});
+        }
+
+        const user = users[0];
+        const otp = Math.floor(100000 + Math.random() * 900000);
+        const otp_expire = new Date(Date.now()+5*60*1000);
+
+        await db.query("UPDATE users SET otp = ?,otp_expire =? WHERE email = ?",[otp,otp_expire,user.email]);
+
+        const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:"ashokkumarpandian7@gmail.com",
+                pass:process.env.APP_PASS
+            }
+        });
+
+        await transporter.sendMail({
+            from:"ashokkumarpandian7@gmail.com",
+            to:user.email,
+            subject:"OTP To Reset Password",
+            html:`<p>Your OTP To Reset Password is <b>${otp}</b>. This OTP will expire in 5 minutes</p>`
+        });
+
+        return res.status(200).json({message:"OTP sent Succesfully"});
 
 
-module.exports = {addEmployee,login,getAllEmployees,logout,getSpecificUser,editUser,deleteUser,getMe,updateProfilePic ,getAdmins,getEmp};
+    } catch (error) {
+        return res.status(500).json({message:"Server Error",error:error.message}); 
+    }
+}
+
+const verifyOtp = async(req,res) =>{
+    const id = req.user.id;
+    const {otp} = req.body;
+
+    const [users] = await db.query("SELECT * FROM users WHERE id = ? AND otp = ? AND otp_expire > NOW()",[id,otp]);
+    console.log(users);
+    if(users.length === 0){
+        return res.status(400).json({message : "Invalid Or Expired OTP"});
+    }
+
+    return res.status(200).json({message:"OTP verified"});
+
+}
+
+const passReset = async (req,res) =>{
+    const id = req.user.id
+    const {newPassword} = req.body;
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword,salt);
+
+        const [employees] = await db.query("SELECT * FROM users WHERE id = ?",[id]); 
+        const emp = employees[0];
+
+        await db.query("UPDATE users SET password = ? , otp = NULL , otp_expire = NULL WHERE email = ? ",[hashedPassword,emp.email]);
+        const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:"ashokkumarpandian7@gmail.com",
+                pass:process.env.APP_PASS
+            }
+        })
+
+        await transporter.sendMail({
+            from:"ashokkumarpandian7@gmail.com",
+            to:emp.email,
+            subject:"Password Reset Done Successfully",
+            html:"<p>Your password has been Reset Successfully </p>"
+        })
+        return res.status(200).json({message:"Password Reset Done"});
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:"Server Error",error:error.message}); 
+    }
+
+}
+
+
+
+module.exports = {addEmployee,login,getAllEmployees,logout,getSpecificUser,editUser,deleteUser,getMe,updateProfilePic ,getAdmins,getEmp , getPositionCounts , changePassword ,
+    sendOtp,
+    verifyOtp,
+    passReset
+};

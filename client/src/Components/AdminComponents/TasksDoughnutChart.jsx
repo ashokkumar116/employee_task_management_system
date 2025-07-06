@@ -23,12 +23,13 @@ const TasksDoughnutChart = ({ completed, inProgress, notStarted }) => {
         backgroundColor: ["#22c55e", "#facc15", "#ef4444"],
         borderColor: ["#16a34a", "#eab308", "#b91c1c"],
         borderWidth: 1,
+        hoverOffset: 10,
       },
     ],
   };
 
   return (
-    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-full max-w-sm grid place-content-center h-48">
+    <div className=" p-5 rounded-lg shadow-md w-full max-w-sm grid place-content-center h-48">
       <Doughnut data={data} options={options} />
     </div>
   );

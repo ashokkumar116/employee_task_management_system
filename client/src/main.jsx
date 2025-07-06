@@ -4,11 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from './Contexts/AuthContext'
 import Sidebar from './Components/Sidebar'
+import ThemeProvider from './Contexts/ThemeContext'
 
 
 createRoot(document.getElementById('root')).render(
-  <AuthProvider>
+  <ThemeProvider>
+
+<AuthProvider>
    
-    <App  />
-  </AuthProvider>,
+   <App  />
+ </AuthProvider>
+
+  </ThemeProvider>
 )

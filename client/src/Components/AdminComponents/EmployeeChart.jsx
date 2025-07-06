@@ -22,12 +22,13 @@ const EmployeeDoughnutChart = ({ admins, employees }) => {
         backgroundColor: [ "#10b981","#3b82f6"],
         borderColor: [ "#047857","#1e40af"], 
         borderWidth: 1,
+        hoverOffset: 10,
       },
     ],
   };
 
   return (
-    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-full max-w-sm grid place-content-center">
+    <div className=" p-5 rounded-lg shadow-md w-full max-w-sm grid place-content-center">
       <Doughnut data={data} options={options}/>
     </div>
   );

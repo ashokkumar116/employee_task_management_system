@@ -10,7 +10,7 @@ import AdminProtectedRoutes from "./utils/AdminProtectedRoutes";
 import Employees from "./Components/AdminComponents/Employees";
 import Tasks from "./Components/AdminComponents/Tasks";
 import Announcements from "./Components/AdminComponents/Announcements";
-import Settings from "./Components/AdminComponents/Settings";
+import Settings from "./Pages/Settings";
 import ViewTask from "./Components/AdminComponents/ViewTask";
 import ViewEmployee from "./Components/AdminComponents/ViewEmployee";
 import ViewAnnouncement from "./Components/AdminComponents/ViewAnnouncement";
@@ -19,9 +19,12 @@ import EmployeeDashboard from "./Components/EmployeeComponents/EmployeeDashboard
 import AssignedTasks from "./Components/EmployeeComponents/AssignedTasks";
 import CompletedTasks from "./Components/EmployeeComponents/CompletedTasks";
 import EmployeeAnnouncements from "./Components/EmployeeComponents/EmployeeAnnouncements";
-import EmployeeSettings from "./Components/EmployeeComponents/EmployeeSettings";
 import Roles from "./Components/AdminComponents/Roles";
 import Positions from "./Components/AdminComponents/Positions";
+import PasswordChange from "./Pages/Settings/PasswordChange";
+import ForgotPassword from "./Pages/Settings/ForgotPassword";
+import OTP from "./Pages/Settings/OTP";
+import ResetPassword from "./Pages/Settings/ResetPassword";
 
 function App() {
     const { user, loading } = useContext(AuthContext);
@@ -97,9 +100,9 @@ function App() {
                         path="/settings"
                         element={
                             user ? (
-                                <AdminProtectedRoutes>
+                                <ProtectedRoutes>
                                     <Settings />
-                                </AdminProtectedRoutes>
+                                </ProtectedRoutes>
                             ) : (
                                 <Navigate to={"/login"} />
                             )
@@ -144,9 +147,13 @@ function App() {
                     <Route path="/my-tasks" element={user ? <EmployeeProtectedRoutes><AssignedTasks/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
                     <Route path="/completed-tasks" element={user ? <EmployeeProtectedRoutes><CompletedTasks/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
                     <Route path="/empannouncement" element={user ? <EmployeeProtectedRoutes><EmployeeAnnouncements/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
-                    <Route path="/empsettings" element={user ? <EmployeeProtectedRoutes><EmployeeSettings/></EmployeeProtectedRoutes> : <Navigate to={'/login'} />} />
+                    
                     <Route path="/roles" element={user ? <AdminProtectedRoutes><Roles/></AdminProtectedRoutes> : <Navigate to={'/login'} />} />
                     <Route path="/positions" element={user ? <AdminProtectedRoutes><Positions/></AdminProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/passwordchange" element={user ? <ProtectedRoutes><PasswordChange/></ProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/forgotpass" element={user ? <ProtectedRoutes><ForgotPassword/></ProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/otp" element={user ? <ProtectedRoutes><OTP/></ProtectedRoutes> : <Navigate to={'/login'} />} />
+                    <Route path="/resetpass" element={user ? <ProtectedRoutes><ResetPassword/></ProtectedRoutes> : <Navigate to={'/login'} />} />
                     
                 </Routes>
             </BrowserRouter>

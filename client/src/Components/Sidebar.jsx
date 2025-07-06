@@ -138,8 +138,8 @@ const Sidebar = () => {
               <Megaphone size={16} /> Announcements
             </Link>
             <Link
-              to="/empsettings"
-              className={`w-full text-left py-2 px-4 rounded-md flex items-center gap-2 ${isActive("/empsettings")}`}
+              to="/settings"
+              className={`w-full text-left py-2 px-4 rounded-md flex items-center gap-2 ${isActive("/settings")}`}
             >
               <SettingsIcon size={16} /> Settings
             </Link>
