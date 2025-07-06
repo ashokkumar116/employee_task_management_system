@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin:"https://famous-lebkuchen-52c89a.netlify.app",
+    origin:"https://taskpilot-by-ashok-kumar-p.netlify.app",
     credentials:true
 }))
 
